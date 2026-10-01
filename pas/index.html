@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BookMyShow UI</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    height: 70px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 7%;
+    gap: 35px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    color: #f84464;
+    cursor: pointer;
+}
+
+.search {
+    flex: 1;
+    max-width: 500px;
+    background: #f2f2f2;
+    border-radius: 5px;
+    padding: 12px 18px;
+    display: flex;
+    gap: 10px;
+}
+
+.search input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+}
+
+.location {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background: #f84464;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ================= NAV ================= */
+
+.navbar {
+    background: #fff;
+    padding: 14px 7%;
+    display: flex;
+    gap: 25px;
+    border-top: 1px solid #eee;
+}
+
+.navbar span {
+    cursor: pointer;
+    color: #444;
+    font-size: 14px;
+}
+
+.navbar span:hover {
+    color: #f84464;
+}
+
+/* ================= COMMON ================= */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.container {
+    width: 86%;
+    margin: auto;
+}
+
+.section {
+    padding: 35px 0;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.section-title h2 {
+    font-size: 22px;
+}
+
+.see-all {
+    color: #f84464;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    height: 390px;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.8), rgba(0,0,0,.1)),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    width: 86%;
+    margin: auto;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    max-width: 480px;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.hero button {
+    margin-top: 25px;
+    padding: 13px 25px;
+    background: #f84464;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ================= MOVIE CARDS ================= */
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 22px;
+}
+
+.movie-card {
+    cursor: pointer;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 310px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: .25s;
+}
+
+.movie-card:hover img {
+    transform: translateY(-5px);
+}
+
+.movie-card h3 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.movie-card p {
+    margin-top: 6px;
+    color: #777;
+    font-size: 13px;
+}
+
+/* ================= MOVIES PAGE ================= */
+
+.page-heading {
+    padding: 35px 0 20px;
+}
+
+.page-heading h1 {
+    font-size: 28px;
+}
+
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.filter {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px 17px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* ================= MOVIE DETAILS ================= */
+
+.movie-detail {
+    min-height: 500px;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.5)),
+        url("https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+    color: white;
+    padding: 60px 0;
+}
+
+.detail-container {
+    width: 86%;
+    margin: auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.detail-poster {
+    width: 280px;
+    height: 410px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.detail-info {
+    max-width: 650px;
+}
+
+.detail-info h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.rating {
+    display: inline-block;
+    background: #333;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.detail-info p {
+    line-height: 1.7;
+    color: #ddd;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.tag {
+    border: 1px solid #aaa;
+    padding: 7px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.book-btn {
+    background: #f84464;
+    border: none;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ================= SHOWTIME ================= */
+
+.showtime-box {
+    background: white;
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 8px;
+}
+
+.dates {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.date {
+    padding: 12px 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.date.selected {
+    background: #f84464;
+    color: white;
+}
+
+.cinema {
+    border-top: 1px solid #eee;
+    padding: 20px 0;
+}
+
+.cinema h3 {
+    margin-bottom: 12px;
+}
+
+.times {
+    display: flex;
+    gap: 12px;
+}
+
+.time {
+    border: 1px solid #f84464;
+    color: #f84464;
+    padding: 9px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.time:hover {
+    background: #f84464;
+    color: white;
+}
+
+/* ================= SEATS ================= */
+
+.seat-page {
+    padding: 40px 0;
+}
+
+.screen {
+    width: 70%;
+    height: 35px;
+    background: linear-gradient(to bottom, #ddd, transparent);
+    margin: 0 auto 50px;
+    text-align: center;
+    color: #777;
+    padding-top: 8px;
+    border-radius: 50%;
+}
+
+.seat-container {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 10px;
+}
+
+.seat-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.seat {
+    width: 32px;
+    height: 28px;
+    border: 1px solid #49a942;
+    color: #49a942;
+    border-radius: 4px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.seat.selected {
+    background: #f84464;
+    border-color: #f84464;
+    color: white;
+}
+
+.seat.booked {
+    background: #ddd;
+    border-color: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.seat-summary {
+    margin-top: 35px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ================= CHECKOUT ================= */
+
+.checkout {
+    padding: 45px 0;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.checkout-card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.checkout-card h2 {
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 14px 0;
+    color: #555;
+}
+
+.total {
+    border-top: 1px solid #ddd;
+    padding-top: 18px;
+    margin-top: 18px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.payment-method {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.payment-method:hover {
+    border-color: #f84464;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 15px;
+    background: #f84464;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ================= SUCCESS ================= */
+
+.success {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: #3dbb63;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto auto 25px;
+    font-size: 40px;
+}
+
+.success h1 {
+    margin-bottom: 12px;
+}
+
+.success p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #333;
+    color: #aaa;
+    padding: 45px 7%;
+    margin-top: 50px;
+}
+
+footer h2 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+footer p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 900px) {
+    .movie-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media(max-width: 600px) {
+    header {
+        padding: 0 4%;
+        gap: 12px;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .navbar {
+        padding: 12px 4%;
+        overflow-x: auto;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .movie-card img {
+        height: 240px;
+    }
+
+    .hero {
+        height: 330px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .detail-poster {
+        width: 220px;
+        height: 320px;
+    }
+
+    .seat-container {
+        padding: 20px 10px;
+        overflow-x: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+    <div class="logo" onclick="showPage('home')">
+        book<span style="color:#333">my</span>show
+    </div>
+
+    <div class="search">
+        🔍
+        <input
+            type="text"
+            placeholder="Search for Movies, Events, Plays, Sports and Activities"
+        >
+    </div>
+
+    <div class="location">
+        📍 Chennai
+    </div>
+
+    <button class="login-btn">Sign In</button>
+</header>
+
+<nav class="navbar">
+    <span onclick="showPage('home')">Home</span>
+    <span onclick="showPage('movies')">Movies</span>
+    <span onclick="showPage('events')">Events</span>
+    <span>Plays</span>
+    <span>Sports</span>
+    <span>Activities</span>
+    <span>Offers</span>
+</nav>
+
+
+<!-- ===================================================== -->
+<!-- HOME PAGE -->
+<!-- ===================================================== -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Experience Cinema<br>Like Never Before</h1>
+
+            <p>
+                Discover the latest movies, events and entertainment
+                happening around you.
+            </p>
+
+            <button onclick="showPage('movies')">
+                Explore Movies
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+
+            <div class="section-title">
+                <h2>Recommended Movies</h2>
+                <span class="see-all" onclick="showPage('movies')">
+                    See All →
+                </span>
+            </div>
+
+            <div class="movie-grid">
+
+                <div class="movie-card" onclick="openMovie('Avatar 3')">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=500&q=80">
+                    <h3>Avatar 3</h3>
+                    <p>Action • Adventure</p>
+                </div>
+
+                <div class="movie-card" onclick="openMovie('Interstellar')">
+                    <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=500&q=80">
+                    <h3>Interstellar</h3>
+                    <p>Sci-Fi • Drama</p>
+                </div>
+
+                <div class="movie-card" onclick="openMovie('The Batman')">
+                    <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&w=500&q=80">
+                    <h3>The Batman</h3>
+                    <p>Action • Crime</p>
+                </div>
+
+                <div class="movie-card" onclick="openMovie('Dune')">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80">
+                    <h3>Dune</h3>
+                    <p>Sci-Fi • Adventure</p>
+                </div>
+
+                <div class="movie-card" onclick="openMovie('Oppenheimer')">
+                    <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=500&q=80">
+                    <h3>Oppenheimer</h3>
+                    <p>Drama • History</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- MOVIES PAGE -->
+<!-- ===================================================== -->
+
+<section id="movies" class="page">
+
+    <div class="container">
+
+        <div class="page-heading">
+            <h1>Movies in Chennai</h1>
+        </div>
+
+        <div class="filters">
+            <div class="filter">Language ▾</div>
+            <div class="filter">Genre ▾</div>
+            <div class="filter">Format ▾</div>
+            <div class="filter">Price ▾</div>
+        </div>
+
+        <div class="movie-grid">
+
+            <div class="movie-card" onclick="openMovie('Avatar 3')">
+                <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=500&q=80">
+                <h3>Avatar 3</h3>
+                <p>English • Action</p>
+            </div>
+
+            <div class="movie-card" onclick="openMovie('Interstellar')">
+                <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=500&q=80">
+                <h3>Interstellar</h3>
+                <p>English • Sci-Fi</p>
+            </div>
+
+            <div class="movie-card" onclick="openMovie('The Batman')">
+                <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&w=500&q=80">
+                <h3>The Batman</h3>
+                <p>English • Action</p>
+            </div>
+
+            <div class="movie-card" onclick="openMovie('Dune')">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80">
+                <h3>Dune</h3>
+                <p>English • Adventure</p>
+            </div>
+
+            <div class="movie-card" onclick="openMovie('Oppenheimer')">
+                <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=500&q=80">
+                <h3>Oppenheimer</h3>
+                <p>English • Drama</p>
+            </div>
+
+            <div class="movie-card" onclick="openMovie('Joker')">
+                <img src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=500&q=80">
+                <h3>Joker</h3>
+                <p>English • Crime</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- MOVIE DETAILS PAGE -->
+<!-- ===================================================== -->
+
+<section id="details" class="page">
+
+    <div class="movie-detail">
+
+        <div class="detail-container">
+
+            <img id="detailPoster"
+                 class="detail-poster"
+                 src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80">
+
+            <div class="detail-info">
+
+                <h1 id="movieTitle">Avatar 3</h1>
+
+                <div class="rating">
+                    ⭐ 8.6/10 &nbsp; • &nbsp; 25K Ratings
+                </div>
+
+                <div class="tags">
+                    <span class="tag">Action</span>
+                    <span class="tag">Adventure</span>
+                    <span class="tag">Sci-Fi</span>
+                    <span class="tag">English</span>
+                </div>
+
+                <p>
+                    Experience an epic cinematic adventure filled with
+                    breathtaking visuals, unforgettable characters and
+                    an incredible story.
+                </p>
+
+                <p style="margin-top:15px;">
+                    2h 45m • English • UA • 2D, IMAX
+                </p>
+
+                <br>
+
+                <button class="book-btn" onclick="showPage('seats')">
+                    Book Tickets
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+
+            <div class="section-title">
+                <h2>About the Movie</h2>
+            </div>
+
+            <p style="line-height:1.8;color:#666;">
+                Watch the latest blockbuster on the big screen.
+                Select your preferred cinema, showtime and seats
+                to continue with your booking.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SEAT PAGE -->
+<!-- ===================================================== -->
+
+<section id="seats" class="page">
+
+    <div class="container seat-page">
+
+        <h1 style="margin-bottom:10px;">
+            Select Your Seats
+        </h1>
+
+        <p style="color:#777;margin-bottom:30px;">
+            Avatar 3 • PVR INOX: Chennai • 7:30 PM
+        </p>
+
+        <div class="seat-container">
+
+            <div class="screen">
+                SCREEN THIS WAY
+            </div>
+
+            <div id="seatLayout"></div>
+
+            <div class="seat-summary">
+
+                <div>
+                    <strong id="seatCount">0</strong>
+                    seats selected
+                    <br>
+                    ₹<strong id="seatPrice">0</strong>
+                </div>
+
+                <button
+                    class="book-btn"
+                    onclick="goCheckout()">
+                    Continue
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CHECKOUT PAGE -->
+<!-- ===================================================== -->
+
+<section id="checkout" class="page">
+
+    <div class="container checkout">
+
+        <h1 style="margin-bottom:30px;">
+            Complete Your Booking
+        </h1>
+
+        <div class="checkout-grid">
+
+            <div>
+
+                <div class="checkout-card">
+
+                    <h2>Booking Details</h2>
+
+                    <div class="summary-row">
+                        <span>Movie</span>
+                        <strong>Avatar 3</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Cinema</span>
+                        <strong>PVR INOX</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Date</span>
+                        <strong>Today</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Showtime</span>
+                        <strong>7:30 PM</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Seats</span>
+                        <strong id="checkoutSeats">A1</strong>
+                    </div>
+
+                </div>
+
+                <div class="checkout-card">
+
+                    <h2>Payment Method</h2>
+
+                    <div class="payment-method">
+                        💳 Credit / Debit Card
+                    </div>
+
+                    <div class="payment-method">
+                        🟣 UPI
+                    </div>
+
+                    <div class="payment-method">
+                        🏦 Net Banking
+                    </div>
+
+                    <div class="payment-method">
+                        🎁 Gift Card / Coupon
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="checkout-card">
+
+                    <h2>Price Details</h2>
+
+                    <div class="summary-row">
+                        <span>Tickets</span>
+                        <strong id="ticketAmount">₹0</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Convenience Fee</span>
+                        <strong>₹40</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Taxes</span>
+                        <strong>₹20</strong>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <strong id="totalAmount">₹60</strong>
+                    </div>
+
+                    <button class="pay-btn"
+                            onclick="paymentSuccess()">
+                        Pay Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SUCCESS PAGE -->
+<!-- ===================================================== -->
+
+<section id="success" class="page">
+
+    <div class="success">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1>Booking Confirmed!</h1>
+
+        <p>
+            Your movie tickets have been booked successfully.
+        </p>
+
+        <p>
+            Booking ID: <strong>BMS826491</strong>
+        </p>
+
+        <button class="book-btn" onclick="showPage('home')">
+            Back to Home
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>book<span style="color:#f84464">my</span>show</h2>
+
+    <p>
+        Your one-stop destination for movies, events,
+        sports and entertainment.
+    </p>
+
+    <p>
+        © 2026 BookMyShow UI Concept
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showPage(pageId) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const page = document.getElementById(pageId);
+
+    if (page) {
+        page.classList.add("active");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =====================================================
+   MOVIE DETAILS
+===================================================== */
+
+const movies = {
+
+    "Avatar 3": {
+        poster:
+        "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80"
+    },
+
+    "Interstellar": {
+        poster:
+        "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=600&q=80"
+    },
+
+    "The Batman": {
+        poster:
+        "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&w=600&q=80"
+    },
+
+    "Dune": {
+        poster:
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80"
+    },
+
+    "Oppenheimer": {
+        poster:
+        "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=600&q=80"
+    },
+
+    "Joker": {
+        poster:
+        "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=600&q=80"
+    }
+
+};
+
+
+function openMovie(movieName) {
+
+    const movie = movies[movieName];
+
+    document.getElementById("movieTitle").innerText =
+        movieName;
+
+    if (movie) {
+        document.getElementById("detailPoster").src =
+            movie.poster;
+    }
+
+    showPage("details");
+}
+
+
+/* =====================================================
+   SEAT GENERATION
+===================================================== */
+
+let selectedSeats = [];
+
+const seatLayout = document.getElementById("seatLayout");
+
+function generateSeats() {
+
+    const rows = ["A", "B", "C", "D", "E", "F", "G"];
+
+    rows.forEach((row, rowIndex) => {
+
+        const rowElement = document.createElement("div");
+
+        rowElement.className = "seat-row";
+
+        for (let i = 1; i <= 12; i++) {
+
+            const seat = document.createElement("div");
+
+            seat.className = "seat";
+
+            seat.innerText = i;
+
+            const seatName = row + i;
+
+            /*
+             Randomly mark some seats as booked
+            */
+
+            if (
+                (rowIndex === 1 && i === 4) ||
+                (rowIndex === 1 && i === 5) ||
+                (rowIndex === 3 && i === 8) ||
+                (rowIndex === 4 && i === 9) ||
+                (rowIndex === 5 && i === 2)
+            ) {
+                seat.classList.add("booked");
+            }
+
+            seat.onclick = function() {
+
+                if (seat.classList.contains("booked")) {
+                    return;
+                }
+
+                if (seat.classList.contains("selected")) {
+
+                    seat.classList.remove("selected");
+
+                    selectedSeats =
+                        selectedSeats.filter(
+                            s => s !== seatName
+                        );
+
+                } else {
+
+                    if (selectedSeats.length >= 6) {
+                        alert("Maximum 6 seats allowed.");
+                        return;
+                    }
+
+                    seat.classList.add("selected");
+
+                    selectedSeats.push(seatName);
+                }
+
+                updateSeatSummary();
+            };
+
+            rowElement.appendChild(seat);
+        }
+
+        seatLayout.appendChild(rowElement);
+    });
+}
+
+generateSeats();
+
+
+/* =====================================================
+   SEAT SUMMARY
+===================================================== */
+
+function updateSeatSummary() {
+
+    const count = selectedSeats.length;
+
+    const price = count * 220;
+
+    document.getElementById("seatCount").innerText =
+        count;
+
+    document.getElementById("seatPrice").innerText =
+        price;
+}
+
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+
+function goCheckout() {
+
+    if (selectedSeats.length === 0) {
+
+        alert("Please select at least one seat.");
+
+        return;
+    }
+
+    document.getElementById("checkoutSeats").innerText =
+        selectedSeats.join(", ");
+
+    const ticketAmount =
+        selectedSeats.length * 220;
+
+    const total =
+        ticketAmount + 40 + 20;
+
+    document.getElementById("ticketAmount").innerText =
+        "₹" + ticketAmount;
+
+    document.getElementById("totalAmount").innerText =
+        "₹" + total;
+
+    showPage("checkout");
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+function paymentSuccess() {
+
+    const button =
+        document.querySelector(".pay-btn");
+
+    button.innerText =
+        "Processing...";
+
+    button.disabled = true;
+
+    setTimeout(() => {
+
+        showPage("success");
+
+        button.innerText =
+            "Pay Now";
+
+        button.disabled = false;
+
+    }, 1500);
+}
+
+</script>
+
+</body>
+</html>
